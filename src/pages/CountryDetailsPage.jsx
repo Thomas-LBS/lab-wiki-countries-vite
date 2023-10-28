@@ -1,51 +1,84 @@
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import {useParams, Link } from 'react-router-dom'
+
 function CountryDetailsPage() {
+
+    const {countryId} = useParams()
+
+    const [countryData, setCountryData] = useState("") 
+
+    useEffect(() => {
+
+        axios
+            .get(`https://ih-countries-api.herokuapp.com/countries/${countryId}`) 
+            .then(country => {
+                setCountryData(country.data)
+
+            })
+
+            .catch(err => console.log(err))
+
+        }, [countryId])
+
     return (
-        <>
-            <div>
 
-                <div className="container">
-                    <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>Country Details</h2>
 
-                    <h1>France</h1>
+        <div>
 
-                    <table className="table">
-                        <thead></thead>
-                        <tbody>
-                            <tr>
-                                <td style={{ width: "30%" }}>Capital</td>
-                                <td>Paris</td>
-                            </tr>
-                            <tr>
-                                <td>Area</td>
-                                <td>
-                                    551695 km
-                                    <sup>2</sup>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Borders</td>
-                                <td>
-                                    <ul>
-                                        <li><a href="/AND">Andorra</a></li>
-                                        <li><a href="/BEL">Belgium</a></li>
-                                        <li><a href="/DEU">Germany</a></li>
-                                        <li><a href="/ITA">Italy</a></li>
-                                        <li><a href="/LUX">Luxembourg</a></li>
-                                        <li><a href="/MCO">Monaco</a></li>
-                                        <li><a href="/ESP">Spain</a></li>
-                                        <li><a href="/CHE">Switzerland</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div className="container">
+                <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>Country Details</h2>
+
+
+                <h1>{countryData.name ? countryData.name.common : "Loading..."}</h1>
+                {/*
+                <img src={`https://flagpedia.net/data/flags/icon/72x54/${countryData.alpha2Code.toLowerCase()}.png`} alt="country flag" width="auto" height="72"/>
+                */}
+
+                <table className="table">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td style={{ width: "30%" }}>Capital</td>
+                            <td>{countryData.capital}</td>
+                        </tr>
+                        <tr>
+                            <td>Area</td>
+                            <td>
+                                {countryData.area} Km
+                                <sup>2</sup>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Borders</td>
+                            <td>
+
+                                {/*{
+                                    countryData.borders.map((borderCountry, index) => {
+                                        return (
+                                            <li key={index}>
+                                                <Link
+                                                    to={`/${borderCountry}`}
+                                                >{borderCountry}
+                                                </Link>
+                                            </li>
+
+                                        )
+                                    })
+                                }*/}
+                                    
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-
-        </>
-
+        </div>
     )
+
 }
+
+
 
 export default CountryDetailsPage
