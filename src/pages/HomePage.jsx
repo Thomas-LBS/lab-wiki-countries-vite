@@ -21,10 +21,11 @@ function HomePage() {
     return (
         <div>
 
-            <div className="container" style={{ maxHeight: "90vh", overflow: "scroll" }}>
-                <h2 style={{ fontSize: "24px" }}>WikiCountries: Your Guide to the World</h2>
+            <div className="container">
+                <h1 style={{ fontSize: "24px" }}>WikiCountries: Your Guide to the World</h1>
+                <br/>
 
-                <div className="list-group">
+                <div className="list-group" style={{ maxHeight: "75vh", overflow: "auto" }}>
 
                     {
                         countries.map((country) => {
