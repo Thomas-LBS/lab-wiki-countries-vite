@@ -2,6 +2,7 @@ import "./App.css"
 import { Routes, Route} from 'react-router-dom'
 import Navbar from "./components/Navbar"
 import HomePage from "./pages/HomePage"
+import ErrorPage from "./pages/ErrorPage"
 import CountryDetailsPage from "./pages/CountryDetailsPage"
 
 
@@ -14,6 +15,7 @@ function App() {
        <Routes>        
         <Route path="/" element={<HomePage />} />
         <Route path="/:countryId" element={<CountryDetailsPage />} />       
+        <Route path="*" element={ <ErrorPage /> } />
       </Routes>
     </div>
   )
