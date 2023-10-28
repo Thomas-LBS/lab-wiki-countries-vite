@@ -1,5 +1,5 @@
 import "./App.css"
-import { Routes, Route, useParams, Link } from 'react-router-dom'
+import { Routes, Route} from 'react-router-dom'
 import Navbar from "./components/Navbar"
 import HomePage from "./pages/HomePage"
 import CountryDetailsPage from "./pages/CountryDetailsPage"
